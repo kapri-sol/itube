@@ -1,0 +1,19 @@
+{
+  "name": "itube",
+  "version": "1.0.0",
+  "description": "Server for the Youtube Cloen with GraphQL, Typescript, NodeJS",
+  "main": "index.js",
+  "repository": "https://github.com/kapri-sol/itube",
+  "author": "kapri",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.7.3",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.6.2"
+  },
+  "scripts": {
+    "dev": "cd src && nodemon --exec ts-node index.ts -e ts, graphql"
+  }
+}
