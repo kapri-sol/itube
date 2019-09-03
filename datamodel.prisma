@@ -1,0 +1,38 @@
+type User {
+  id: ID! @id
+  username: String! @unique
+  email: String!  @unique
+  firstName: String @default(value: "")
+  lastName: String!
+  subscribes: [Channel!] @relation(name: "ChannelsOfUser")
+}
+
+type Channel {
+  id: ID! @id
+  user: User! @relation(name: "UserOfChannel")
+  subscribers: [User!] @relation(name: "SubscribersOfChannel")
+  posts: [Post!] @relation(name: "PostOfChannel")
+}
+
+type Post {
+  id: ID! @id
+  channel: Channel! @relation(name: "ChannelOfPost")
+  text: String
+  location: String
+  views: Int! @default(value: 0)
+  likes: [Like!] @relation(name: "LikeofPost")
+  comment: [Comment!] @relation(name: "CommentofPost")
+}
+
+type Like {
+  id: ID! @id
+  user: User! @relation(name: "UserOfLike")
+  post: Post! @relation(name: "PostOfLike")
+}
+
+type Comment {
+  id: ID! @id
+  text: String!
+  user: User! @relation(name: "UserOfComment")
+  post: Post! @relation(name: "PostOfComment")
+}

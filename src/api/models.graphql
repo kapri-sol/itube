@@ -1,0 +1,38 @@
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String!
+  subscribes: [Channel!]
+}
+
+type Channel {
+  id: Int!
+  user: User!
+  subscribers: [User!]
+  posts: [Post!]
+}
+
+type Post {
+  id: Int!
+  channel: Channel!
+  text: String
+  location: String
+  view: Int!
+  likes: [Like!]
+  comment: [Comment!]
+}
+
+type Like {
+  id: Int!
+  user: User!
+  post: Post!
+}
+
+type Comment {
+  id: Int!
+  text: String!
+  user: User!
+  post: Post!
+}
