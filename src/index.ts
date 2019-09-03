@@ -11,6 +11,6 @@ const appOptions: Options = {
   endpoint: GRAPHQL_ENDPOINT
 };
 
-const handleAppStart = () => console.log("Listening on port ${PORT}");
+const handleAppStart = () => console.log(`Listening on port ${PORT}`);
 
 app.start(appOptions, handleAppStart);
