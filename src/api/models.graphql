@@ -1,21 +1,22 @@
 type User {
-  id: Int!
+  id: ID!
   username: String!
   email: String!
+  password: String!
   firstName: String
   lastName: String!
   subscribes: [Channel!]
 }
 
 type Channel {
-  id: Int!
+  id: ID!
   user: User!
   subscribers: [User!]
   posts: [Post!]
 }
 
 type Post {
-  id: Int!
+  id: ID!
   channel: Channel!
   text: String
   location: String
@@ -25,13 +26,13 @@ type Post {
 }
 
 type Like {
-  id: Int!
+  id: ID!
   user: User!
   post: Post!
 }
 
 type Comment {
-  id: Int!
+  id: ID!
   text: String!
   user: User!
   post: Post!
