@@ -1,5 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
-import { hashPass } from "../../../utils";
+import { hashPass } from "../../../utils/hashPass";
 
 export default {
   Mutation: {
