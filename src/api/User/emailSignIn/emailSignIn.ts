@@ -1,5 +1,6 @@
 import { prisma } from "../../../../generated/prisma-client";
 import { comparePass } from "../../../utils/hashPass";
+import createJWT from "../../../utils/createJWT";
 
 export default {
   Mutation: {
@@ -22,10 +23,11 @@ export default {
               token: null
             };
           else {
+            const token = createJWT(user.id);
             return {
               ok: true,
               error: null,
-              token: "Coming soon"
+              token
             };
           }
         }

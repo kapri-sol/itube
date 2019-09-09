@@ -25,6 +25,7 @@ const verifyUser = async (payload, done) => {
 export const authenticateJWT = (req, res, next) =>
   passport.authenticate("jwt", { session: false }, (error, user) => {
     if (user) req.user = user;
+    console.log(user);
     next();
   })(req, res, next);
 
