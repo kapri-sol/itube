@@ -1,0 +1,8 @@
+type Mutation {
+  createPost(
+    channelId: ID!
+    title: String!
+    content: String!
+    file: Upload!
+  ): Post!
+}

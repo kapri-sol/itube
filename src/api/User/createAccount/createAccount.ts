@@ -6,11 +6,11 @@ export default {
     createAccount: async (_, args) => {
       const { username, email, password, firstName = "", lastName = "" } = args;
       const user = await prisma.createUser({
-        username,
         email,
-        password: await hashPass(password),
+        username,
         firstName,
-        lastName
+        lastName,
+        password: await hashPass(password)
       });
       return user;
     }

@@ -1,11 +1,10 @@
 export default {
   Query: {
-    user: async (_, args, context) => {
+    me: async (_, __, context) => {
       try {
         return context.req.user;
       } catch (err) {
         console.log(err);
-        return err;
       }
     }
   }

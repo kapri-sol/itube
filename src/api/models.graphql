@@ -6,10 +6,14 @@ type User {
   firstName: String
   lastName: String!
   subscribes: [Channel!]
+  channels: [Channel!]
+  likes: [Like!]
+  comments: [Comment!]
 }
 
 type Channel {
   id: ID!
+  name: String!
   user: User!
   subscribers: [User!]
   posts: [Post!]
@@ -18,11 +22,12 @@ type Channel {
 type Post {
   id: ID!
   channel: Channel!
-  text: String
-  location: String
-  view: Int!
+  title: String!
+  content: String!
+  file: File
+  views: Int!
   likes: [Like!]
-  comment: [Comment!]
+  comments: [Comment!]
 }
 
 type Like {
@@ -37,3 +42,13 @@ type Comment {
   user: User!
   post: Post!
 }
+
+type File {
+  id: ID!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  post: Post!
+}
+
+scalar Upload

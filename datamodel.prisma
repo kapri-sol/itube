@@ -5,35 +5,48 @@ type User {
   password: String!
   firstName: String @default(value: "")
   lastName: String!
-  subscribes: [Channel!] @relation(name: "ChannelsOfUser")
+  subscribes: [Channel!] @relation(name: "SubscribesOfUser")
+  channels: [Channel!] @relation(name: "ChannelOfUser")
+  likes: [Like!] @relation(name: "LikeOfUser")
+  comments: [Comment!] @relation(name: "CommentOfUser")
 }
 
 type Channel {
   id: ID! @id
-  user: User! @relation(name: "UserOfChannel")
-  subscribers: [User!] @relation(name: "SubscribersOfChannel")
+  name: String! @unique
+  user: User! @relation(name: "ChannelOfUser")
+  subscribers: [User!] @relation(name: "SubscribesOfUser")
   posts: [Post!] @relation(name: "PostOfChannel")
 }
 
 type Post {
   id: ID! @id
-  channel: Channel! @relation(name: "ChannelOfPost")
-  text: String
-  location: String
+  channel: Channel! @relation(name: "PostOfChannel")
+  title: String!
+  content: String!
+  file: File! @relation(name: "FileOfPost", link: INLINE)
   views: Int! @default(value: 0)
-  likes: [Like!] @relation(name: "LikeofPost")
-  comment: [Comment!] @relation(name: "CommentofPost")
+  likes: [Like!] @relation(name: "LikeOfPost")
+  comments: [Comment!] @relation(name: "CommentOfPost")
 }
 
 type Like {
   id: ID! @id
-  user: User! @relation(name: "UserOfLike")
-  post: Post! @relation(name: "PostOfLike")
+  user: User! @relation(name: "LikeOfUser")
+  post: Post! @relation(name: "LikeOfPost")
 }
 
 type Comment {
   id: ID! @id
   text: String!
-  user: User! @relation(name: "UserOfComment")
-  post: Post! @relation(name: "PostOfComment")
+  user: User! @relation(name: "CommentOfUser")
+  post: Post! @relation(name: "CommentOfPost")
+}
+
+type File {
+  id: ID! @id
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  post: Post @relation(name: "FileOfPost")
 }
