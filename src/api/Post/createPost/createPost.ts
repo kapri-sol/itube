@@ -13,7 +13,8 @@ const getExtOfFile = filename => {
 export default {
   Mutation: {
     createPost: async (_, args, { req }) => {
-      const { channelId, title, content, file } = await args;
+      const { user } = req.user;
+      const { title, content, file } = await args;
       const {
         filename,
         mimetype,
@@ -40,9 +41,9 @@ export default {
         createWriteStream(filePath + "/" + File.id + getExtOfFile(filename))
       );
       const post = await prisma.createPost({
-        channel: {
+        user: {
           connect: {
-            id: channelId
+            id: user.id
           }
         },
         title,

@@ -1,39 +1,48 @@
 type User {
   id: ID!
+  avatar: String
   username: String!
   email: String!
   password: String!
   firstName: String
   lastName: String!
-  subscribes: [Channel!]
-  channels: [Channel!]
+  fullName: String!
+  isSelf: Boolean!
+  isSubscribe: Boolean!
+  subscribes: [User!]
+  subscribesCount: Int!
+  subscribers: [User!]
+  subscribersCount: Int!
+  posts: [Post!]
+  postsCount: Int!
   likes: [Like!]
   comments: [Comment!]
-}
-
-type Channel {
-  id: ID!
-  name: String!
-  user: User!
-  subscribers: [User!]
-  posts: [Post!]
+  createAt: String!
+  updateAt: String!
 }
 
 type Post {
   id: ID!
-  channel: Channel!
+  user: User!
   title: String!
   content: String!
   file: File
   views: Int!
   likes: [Like!]
+  isLiked: Boolean!
+  likeCount: Int!
   comments: [Comment!]
+  commentCount: Int!
+  createAt: String!
+  updateAt: String!
 }
 
 type Like {
   id: ID!
   user: User!
   post: Post!
+  createAt: String!
+  updateAt: String!
 }
 
 type Comment {
@@ -41,6 +50,8 @@ type Comment {
   text: String!
   user: User!
   post: Post!
+  createAt: String!
+  updateAt: String!
 }
 
 type File {
@@ -49,6 +60,8 @@ type File {
   mimetype: String!
   encoding: String!
   post: Post!
+  createAt: String!
+  updateAt: String!
 }
 
 scalar Upload
