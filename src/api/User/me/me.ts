@@ -1,8 +1,9 @@
 export default {
   Query: {
-    me: async (_, __, context) => {
+    me: async (_, __, { req }) => {
       try {
-        return context.req.user;
+        const { user } = req;
+        return user;
       } catch (err) {
         console.log(err);
       }

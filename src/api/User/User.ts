@@ -1,7 +1,17 @@
 import { prisma } from "../../../generated/prisma-client";
+const defaultAvatar = "/default/user.png";
 
 export default {
   User: {
+    avatar: async ({ id }) => {
+      const avatar = await prisma.user({ id }).avatar();
+      if (avatar) {
+        return avatar;
+      } else {
+        return defaultAvatar;
+      }
+    },
+    posts: ({ id }) => prisma.user({ id }).posts(),
     subscribes: ({ id }) => prisma.user({ id }).subscribes(),
     subscribers: ({ id }) => prisma.user({ id }).subscribers(),
     likes: ({ id }) => prisma.user({ id }).likes(),

@@ -17,12 +17,13 @@ type User {
   postsCount: Int!
   likes: [Like!]
   comments: [Comment!]
-  createAt: String!
-  updateAt: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Post {
   id: ID!
+  isImg: Boolean!
   user: User!
   title: String!
   content: String!
@@ -33,16 +34,16 @@ type Post {
   likeCount: Int!
   comments: [Comment!]
   commentCount: Int!
-  createAt: String!
-  updateAt: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Like {
   id: ID!
   user: User!
   post: Post!
-  createAt: String!
-  updateAt: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Comment {
@@ -50,8 +51,8 @@ type Comment {
   text: String!
   user: User!
   post: Post!
-  createAt: String!
-  updateAt: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type File {
@@ -59,9 +60,10 @@ type File {
   filename: String!
   mimetype: String!
   encoding: String!
+  url: String!
   post: Post!
-  createAt: String!
-  updateAt: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 scalar Upload

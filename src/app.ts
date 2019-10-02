@@ -1,4 +1,5 @@
 import cors from "cors";
+import express from "express";
 import { NextFunction, Response } from "express";
 import { GraphQLServer } from "graphql-yoga";
 import helmet from "helmet";
@@ -27,6 +28,7 @@ class App {
     this.app.express.use(logger("dev"));
     this.app.express.use(helmet());
     this.app.express.use(this.jwt);
+    this.app.express.use(express.static("../upload"));
     // this.app.express.use(authenticateJWT);
   };
 
