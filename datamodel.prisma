@@ -22,7 +22,7 @@ type Post {
   title: String
   content: String!
   file: File! @relation(name: "FileOfPost", link: INLINE, onDelete: CASCADE)
-  views: Int @default(value: 0)
+  views: Int! @default(value: 0)
   likes: [Like!] @relation(name: "LikeOfPost", onDelete: CASCADE)
   comments: [Comment!] @relation(name: "CommentOfPost", onDelete: CASCADE)
   createdAt: DateTime! @createdAt

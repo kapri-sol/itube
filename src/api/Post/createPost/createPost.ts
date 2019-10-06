@@ -69,7 +69,6 @@ export default {
         },
         isImg
       });
-      console.log(post);
       return post;
     }
   }
