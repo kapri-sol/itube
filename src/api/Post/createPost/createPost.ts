@@ -18,8 +18,8 @@ export default {
       } = await file.then(value => {
         return value;
       });
-      const stream = createReadStream();
-
+      const readStream = createReadStream();
+      // console.log(stream.read());
       const File = await prisma.createFile({
         filename,
         mimetype,
@@ -35,18 +35,20 @@ export default {
       const filePath = path.join(uploadPath, mimetype, dayPath);
       const fileName = filePath + "/" + File.id + getExtOfFile(filename);
       await fs.mkdirSync(filePath, { recursive: true });
-      await stream.pipe(createWriteStream(fileName));
+      let writeStream = await createWriteStream(fileName);
+      await readStream.pipe(writeStream);
+      await writeStream.on("close", () => console.log("All done!"));
 
       let isImg;
       if (mimetype.substring(0, 5) === "image") {
         isImg = true;
       } else {
         isImg = false;
-        ffmpeg(fileName)
+        await ffmpeg(fileName)
           .duration(5)
           .output(filePath + "/" + File.id + ".gif")
           .run();
-        ffmpeg(fileName).screenshots({
+        await ffmpeg(fileName).screenshots({
           timestamps: [0],
           filename: File.id + ".png",
           folder: filePath,

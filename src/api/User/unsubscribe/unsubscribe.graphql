@@ -1,0 +1,3 @@
+type Mutation {
+  unsubscribe(postId: String!): Boolean!
+}
