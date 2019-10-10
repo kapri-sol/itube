@@ -1,77 +1,40 @@
 import { prisma } from "../../../../generated/prisma-client";
-import fs, { createWriteStream } from "fs";
-import path from "path";
-import { uploadPath } from "../../../../upload";
-import { getExtOfFile } from "../../../utils/fileManage";
-import ffmpeg from "fluent-ffmpeg";
-
 export default {
   Mutation: {
     createPost: async (_, args, { req }) => {
       const { user } = req;
-      const { title, content, file } = await args;
-      const {
-        filename,
-        mimetype,
-        encoding,
-        createReadStream
-      } = await file.then(value => {
-        return value;
-      });
-      const readStream = createReadStream();
-      // console.log(stream.read());
-      const File = await prisma.createFile({
-        filename,
-        mimetype,
-        encoding
-      });
-      const day = File.createdAt;
-      const dayPath =
-        day.substring(0, 4) +
-        "/" +
-        day.substring(5, 7) +
-        "/" +
-        day.substring(8, 10);
-      const filePath = path.join(uploadPath, mimetype, dayPath);
-      const fileName = filePath + "/" + File.id + getExtOfFile(filename);
-      await fs.mkdirSync(filePath, { recursive: true });
-      let writeStream = await createWriteStream(fileName);
-      await readStream.pipe(writeStream);
-      await writeStream.on("close", () => console.log("All done!"));
-
-      let isImg;
-      if (mimetype.substring(0, 5) === "image") {
-        isImg = true;
-      } else {
-        isImg = false;
-        await ffmpeg(fileName)
-          .duration(5)
-          .output(filePath + "/" + File.id + ".gif")
-          .run();
-        await ffmpeg(fileName).screenshots({
-          timestamps: [0],
-          filename: File.id + ".png",
-          folder: filePath,
-          size: "320x240"
-        });
+      const { title, content, fileId } = await args;
+      try {
+        const File = await prisma.file({ id: fileId });
+        let isImg;
+        if (File) {
+          if (File.mimetype.substring(0, 5) === "image") {
+            isImg = true;
+          } else {
+            isImg = false;
+          }
+          const post = await prisma.createPost({
+            user: {
+              connect: {
+                id: user.id
+              }
+            },
+            title,
+            content,
+            file: {
+              connect: {
+                id: File.id
+              }
+            },
+            isImg
+          });
+          return post;
+        } else {
+          return null;
+        }
+      } catch (error) {
+        return null;
       }
-
-      const post = await prisma.createPost({
-        user: {
-          connect: {
-            id: user.id
-          }
-        },
-        title,
-        content,
-        file: {
-          connect: {
-            id: File.id
-          }
-        },
-        isImg
-      });
-      return post;
     }
   }
 };

@@ -63,5 +63,7 @@ typings/
 yarn.lock
 
 prisma.yml
+docker-compose.yml
 generated
+
 upload

@@ -7,7 +7,6 @@ import logger from "morgan";
 import schema from "./schema";
 // import { authenticateJWT } from "./utils/passport";
 import decodeJWT from "./utils/decodeJWT";
-
 import "./env";
 
 class App {
@@ -29,7 +28,6 @@ class App {
     this.app.express.use(helmet());
     this.app.express.use(this.jwt);
     this.app.express.use(express.static("../upload"));
-    // this.app.express.use(authenticateJWT);
   };
 
   private jwt = async (
