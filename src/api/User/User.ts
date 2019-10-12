@@ -1,14 +1,28 @@
 import { prisma } from "../../../generated/prisma-client";
-const defaultAvatar = "/default/user.png";
+import { getExtOfFile } from "../../utils/fileManage";
 
 export default {
   User: {
-    avatar: async ({ id }) => {
+    url: async ({ id }) => {
       const avatar = await prisma.user({ id }).avatar();
+      console.log(avatar);
       if (avatar) {
-        return avatar;
+        const url =
+          "http://localhost:4000/" +
+          avatar.mimetype +
+          "/" +
+          avatar.createdAt.substring(0, 4) +
+          "/" +
+          avatar.createdAt.substring(5, 7) +
+          "/" +
+          avatar.createdAt.substring(8, 10) +
+          "/" +
+          avatar.id +
+          getExtOfFile(avatar.filename);
+        console.log(url);
+        return url;
       } else {
-        return defaultAvatar;
+        return "http://localhost:4000/default/avatar.svg";
       }
     },
     posts: ({ id }) => prisma.user({ id }).posts(),

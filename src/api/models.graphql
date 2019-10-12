@@ -1,6 +1,7 @@
 type User {
   id: ID!
-  avatar: String
+  avatar: File
+  url: String!
   username: String!
   email: String!
   password: String!
@@ -61,7 +62,8 @@ type File {
   mimetype: String!
   encoding: String!
   url: String!
-  post: Post!
+  user: User
+  post: Post
   createdAt: String!
   updatedAt: String!
 }

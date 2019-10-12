@@ -4,8 +4,7 @@ export default {
   Mutation: {
     subscribe: async (_, args, { req }) => {
       const { user } = req;
-      const { postId } = args;
-      const { id } = await prisma.post({ id: postId }).user();
+      const { id } = args;
       try {
         await prisma.updateUser({
           where: { id: user.id },

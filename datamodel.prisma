@@ -1,6 +1,6 @@
 type User {
   id: ID! @id
-  avatar: String @default(value: "default/avatar.png")
+  avatar: File @relation(name: "FileOfUser", link: INLINE, onDelete: CASCADE)
   username: String! @unique
   email: String!  @unique
   password: String!
@@ -51,6 +51,7 @@ type File {
   filename: String!
   mimetype: String!
   encoding: String!
+  user: User @relation(name: "FileOfUser", onDelete: CASCADE)
   post: Post @relation(name: "FileOfPost", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

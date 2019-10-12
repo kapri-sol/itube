@@ -6,6 +6,7 @@ export default {
         return user;
       } catch (err) {
         console.log(err);
+        return null;
       }
     }
   }
