@@ -5,7 +5,7 @@ import Home from "../../Routes/Home";
 import Auth from "../../Routes/Auth/AuthContainer";
 import Profile from "../../Routes/Profile";
 import Search from "../../Routes/Search";
-import Upload from "../../Routes/Upload";
+import Upload from "../../Routes/UploadFile";
 import Video from "../../Routes/Video";
 import Edit from "../../Routes/Edit";
 
