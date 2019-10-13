@@ -1,7 +1,7 @@
 import { Options } from "graphql-yoga";
 import app from "./app";
 
-const PORT: number | string = process.env.PORT || 4000;
+const PORT: number | string = process.env.PORT || 5000;
 const PLAYGROUND_ENDPOINT: string = "/playground";
 const GRAPHQL_ENDPOINT: string = "/graphql";
 
