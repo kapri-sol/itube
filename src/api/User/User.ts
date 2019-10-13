@@ -5,7 +5,6 @@ export default {
   User: {
     url: async ({ id }) => {
       const avatar = await prisma.user({ id }).avatar();
-      console.log(avatar);
       if (avatar) {
         const url =
           "http://localhost:4000/" +
