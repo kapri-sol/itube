@@ -37,7 +37,7 @@
     "client": "yarn run start --prefix client"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "fluent-ffmpeg": "^2.1.2",
     "fs": "^0.0.1-security",
